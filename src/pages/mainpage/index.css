@@ -7,7 +7,7 @@
     height:100%;
     width: 100%;
     opacity : .8;
-    background: linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.4)),url("./res/bg.png") no-repeat 0 50%;
+    background: linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.4)),url("./res/bg.jpg") no-repeat 0 50%;
     background-position: center center !important;
     background-size: cover;
     max-width:100%;
