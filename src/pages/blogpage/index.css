@@ -1,0 +1,41 @@
+.texta{
+    margin-top: 25px;
+}
+textarea
+{
+    background-color:#00002c;
+    font-size: 30px;
+    color : white;
+}
+.sub 
+{
+    color: yellow;
+}
+.buttonsb
+{
+ display: flex;
+ flex-direction: column;
+ font-size: 6px;
+ justify-content: space-around;
+}
+.popups
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height : 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.msg
+{
+   position : relative;
+   width : 100%;
+   padding : 35px;
+   background-color: #363635;
+   color : white;
+   max-width: 600px;
+}

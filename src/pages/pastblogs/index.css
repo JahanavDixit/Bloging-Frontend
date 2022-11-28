@@ -1,0 +1,58 @@
+.lists
+{
+    background-color: #1c1b1b;
+    padding: 10px;
+    margin: 5px;
+}
+.links
+{
+    display: flex;
+    flex-direction: column;
+}
+.blogname
+{
+  font-size: 40px;
+  color : white;
+}
+.blogdate
+{
+  font-size: 20px;
+  color: #b0aeae;
+}
+.wrapper
+{
+  display : flex;
+  flex-direction: column;
+}
+.r1
+{
+  display : flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.r1 > *
+{
+  padding: 10px;
+}
+.r2
+{
+  display : flex;
+  justify-content: left;
+  align-items: center;
+}
+.r2 > *
+{
+  padding : 10px;
+}
+.popups
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height : 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+}
