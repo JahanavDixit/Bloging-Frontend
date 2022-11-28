@@ -30,7 +30,7 @@ function Pastdis(props)
   useEffect(()=>{
   console.log("Use Effect Called")
   const fetchdata = async (setbtnpop) =>{
-   fetch('http://localhost:3001/api')
+   fetch('https://blogs-backend-4peo.onrender.com/api')
   .then(response => response.json())
   .then((data) => {setarr(data);setbtnpop(false)})
   .catch(error => console.log(error))
@@ -46,7 +46,7 @@ function Pastdis(props)
  if(Object.values(arr).length==0)
 { 
   const fetchdata = async (setbtnpop) =>{
-   fetch('http://localhost:3001/api')
+   fetch('https://blogs-backend-4peo.onrender.com/api')
   .then(response => response.json())
   .then((data) => {setarr(data);setbtnpop(false)})
   .catch(error => console.log(error))

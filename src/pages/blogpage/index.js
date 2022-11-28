@@ -18,7 +18,7 @@ const handlesub = () =>{
 
     const data = {'content' : bl,'date' : date, 'time' : time};
 
-    fetch('/api',{
+    fetch('https://blogs-backend-4peo.onrender.com/api',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
