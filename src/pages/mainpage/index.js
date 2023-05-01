@@ -1,5 +1,4 @@
 import './index.css';
-import Navbar from '../navbar/index';
 import {Link} from "react-router-dom";
 
 export default function MainPage()
@@ -8,7 +7,6 @@ export default function MainPage()
     return(
         <>
         <div className = "main">
-	<Navbar/>
 	<div className= "gbox">
 	<div>
         <span className='t1'> 

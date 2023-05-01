@@ -5,62 +5,76 @@ import {
   useParams,
 } from "react-router-dom";
 
-import {useEffect,useState} from 'react';
-import Navbar from '../navbar/index';
+import { useEffect, useState ,useCallback, useMemo } from 'react';
 
 import './index.css';
 
-export default function PastBlogs()
-{
-    return(
-      <Routes>
-      <Route path = "/" element = {<Pastdis cond = "false"/>}/>
-      <Route path="/:id" element={<Pastdis cond = "true" />}/>
-      </Routes>
-    );
+export default function PastBlogs() {
+  const [btnpop, setbtnpop] = useState(true);
+  const [arr, setarr] = useState({});
+
+   const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch('https://blogs-backend-4peo.onrender.com/api');
+      const data = await response.json();
+      setarr(data);
+      setbtnpop(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("Use Effect Called")
+      const timer = setTimeout(() => {
+      fetchData();
+    },);
+    return () => clearTimeout(timer);
+  }, [fetchData])
+
+  useEffect(() => {
+  }, [arr]);
+
+  const PastdisMemo = useMemo(() => {
+    return <Pastdis btnpop={btnpop} arr={arr} />;
+  }, [btnpop, arr]);
+
+  return (
+    <Routes>
+      <Route path="/" element={PastdisMemo} />
+      <Route path="/:id" element={<ForId btnpop={btnpop} arr={arr} />} />
+    </Routes>
+  );
 }
 
-function Pastdis(props)
-{
-  const [btnpop,setbtnpop] = useState(true);
-  const {id} = useParams();
-  const [arr,setarr] = useState({});
-  
-  // sub , blog , id , time , date 
-  useEffect(()=>{
-  console.log("Use Effect Called")
-  const fetchdata = async (setbtnpop) =>{
-   fetch('https://blogs-backend-4peo.onrender.com/api')
-  .then(response => response.json())
-  .then((data) => {setarr(data);setbtnpop(false)})
-  .catch(error => console.log(error))
-  }
-  const timer = setTimeout(() => {
-    fetchdata(setbtnpop);
-  }, 5000);
-  return () => clearTimeout(timer);
-  },[])
-
-  if(props.cond === "true")
-  {
- if(Object.values(arr).length==0)
-{ 
-  const fetchdata = async (setbtnpop) =>{
-   fetch('https://blogs-backend-4peo.onrender.com/api')
-  .then(response => response.json())
-  .then((data) => {setarr(data);setbtnpop(false)})
-  .catch(error => console.log(error))
-  }
-  const timer = setTimeout(() => {
-    fetchdata(setbtnpop);
-  }, 5000);
-  return term(timer)
+function Pastdis(props) {
+  const arr = useState(props.arr);
+  const { id } = useParams(); 
+  return (
+	<>
+      <Popup trigger={props.btnpop} />
+      {Object.values(props.arr).map(function (d, idx) {
+        const time = d.time?.substring(0, 2) + ":" + d.time?.substring(2);
+        return (
+          <div key={idx} className="lists">
+            <Link className="links" id={idx} to={`/pastblogs/${d._id}`}>
+              <div className="blogname">{d.sub}</div>
+              <div className="blogdate">{d.date} {time}</div>
+            </Link>
+          </div>
+        );
+      })}
+    </>
+  );
 }
-  //const d = arr[id];
-  return(
+
+const ForId = (props) => {
+  const { id } = useParams();
+  const [arr, setarr] = useState(props.arr);
+
+   return(
     <>
-    <Popup trigger = {btnpop} />
-    <Navbar/>
+    <Popup trigger = {props.btnpop} />
     <div className="wrapper">
     <div className="r1">
     <div> {arr[id].date}</div>
@@ -74,39 +88,18 @@ function Pastdis(props)
     </>
   );
 }
-  else
-  {
-  return(
-      <>
-      <Popup trigger = {btnpop} /> 
-      <Navbar/>
-      {Object.values(arr).map(function(d, idx){
-        const time =  d.time.substring(0,2) + ":" + d.time.substring(2)
-         return (
-          <div key={idx} className ="lists">
-          <Link className="links" id={idx} to={`/pastblogs/${d._id}`}>
-         <div className='blogname'>{d.sub}</div>
-         <div className='blogdate'>{d.date} {time}</div>
-         </Link>
-         </div>)
-       })}
-      </> 
-  );
-  }
-}
-
 
 const Popup = (props) => {
 
-    return (props.trigger) ? (
-        <div className="popups">
-        <div className = "msg">
+  return (props.trigger) ? (
+    <div className="popups">
+      <div className="msg">
         Please wait loading the results...
-        </div>
-        </div>
-    ):"";    
+      </div>
+    </div>
+  ) : "";
 }
 
 const term = (timer) => {
-clearTimeout(timer);
+  clearTimeout(timer);
 }

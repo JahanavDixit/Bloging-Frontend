@@ -5,18 +5,19 @@ import './index.css';
 import MainPage from './pages/mainpage/index';
 import BlogPage from './pages/blogpage/index';
 import PastBlogs   from './pages/pastblogs';
+import Navbar from './pages/navbar/index';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <BrowserRouter>
+  <BrowserRouter> 
   <Routes>
-  <Route path = "/" element = {<MainPage/>}/>
+  <Route path = "/" element = {[<Navbar/>,<MainPage/>]}/>
   <Route path = "/blogs" element = {<BlogPage/>}/>
-  <Route path = "/pastblogs/*" element = {<PastBlogs/>}>
+  <Route path = "/pastblogs/*" element = {[<Navbar/>,<PastBlogs/>]}>
   </Route>
-  </Routes>  
+  </Routes> 
   </BrowserRouter>
 );
 
